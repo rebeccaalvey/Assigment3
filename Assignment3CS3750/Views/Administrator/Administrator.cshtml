@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Administrator";
+}
+
+<h2>Administrator</h2>
+
+<div>
+	<!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
+	@using (Html.BeginForm(FormMethod.Post))
+	{
+		<!--Need to go to the projects list page that shows all projects and groups in the project as well as the graphs-->
+		<input type="submit" value="View Project List" formaction="" />
+		<br />
+		<br />
+		<br />
+		<div>
+			<!--Needs to go to CreateProject View-->
+			<input type="submit" value="Create Project" formaction="@Url.Action("CreateProject")" />
+		</div>
+		<br />
+		<br />
+		<br />
+		<div>
+			<!--Needs to go to a list of all projects and allow them to be marked as active or inactive-->
+			<input type="submit" value="Active / Inactive Projects" formaction="" />
+		</div>
+	}
+</div>

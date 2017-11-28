@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "CreateProject";
+}
+
+<h2>CreateProject</h2>
+
+<div>
+	<!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
+	@using (Html.BeginForm(FormMethod.Post))
+	{
+		<div>
+			<label>Enter the name of the Project to add below.</label>
+			<br />
+			<input type="text" id="projectName" />
+			<br />
+			<br />
+			<br />
+			<input type="submit" value="Create Project" formaction="@Url.Action("Administrator")" />
+		</div>
+	}
+</div>
