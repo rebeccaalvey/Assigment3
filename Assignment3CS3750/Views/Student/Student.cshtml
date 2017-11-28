@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Student";
+}
+
+<h2>Student</h2>
+
+<div>
+    <!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <input type="submit" value="Clock In" formaction="@Url.Action("StudentClockIn", "Student")"/>
+        <br />
+        <br />
+        <br />
+        <div>
+            <label>Record the work done during this time.</label>
+            <input type="text" id=" student" value="text here" />
+
+            <br />
+            <br />
+            <input type="submit" value="Clock Out" formaction="@Url.Action("StudentClockOut", "Student")" />
+        </div>
+    }
+</div>
+<!-- Student log in and log out section-->
+<br/>
+<br />
+<br />
+<div>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <p> New Student? Create Log In here </p>
+        <input type="submit" value="Create Login" formaction="@Url.Action("CreateStudentLogin", "Student")" />
+    }
+   
+
+</div>
