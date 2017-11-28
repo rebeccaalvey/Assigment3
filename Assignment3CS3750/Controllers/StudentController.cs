@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Assignment3CS3750.Models;
 
 namespace Assignment3CS3750.Controllers
 {
