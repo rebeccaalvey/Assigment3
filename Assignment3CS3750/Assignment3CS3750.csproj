@@ -283,6 +283,8 @@
     <Content Include="Views\Student\Student.cshtml" />
     <Content Include="Views\Student\StudentClockIn.cshtml" />
     <Content Include="Views\Student\StudentClockOut.cshtml" />
+    <Content Include="Views\Student\CreateStudentLogin.cshtml" />
+    <Content Include="Views\Student\StudentLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

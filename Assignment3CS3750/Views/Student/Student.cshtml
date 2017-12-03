@@ -6,9 +6,45 @@
 <h2>Student</h2>
 
 <div>
+    <!-- ADD the project list box here-->
+    <p> Project List</p>
+    <br />
+    @Html.DropDownList("ListItem")
+</div>
+
+<br />
+<br />
+<br />
+
+<table border="1">
+    <tr>
+        <th> Student First Name</th>
+        <th> Student Last Name</th>
+    </tr>
+    
+    <tr> 
+    <td> ADD 1  </td>
+    <td> ADD 1  </td>
+    </tr>
+    <tr>
+        <td> ADD 2  </td>
+        <td> ADD 2  </td>
+    </tr>
+    <tr>
+        <td> ADD 3  </td>
+        <td> ADD 3  </td>
+    </tr>
+
+</table>
+
+<br />
+<br />
+
+<div>
     <!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
     @using (Html.BeginForm(FormMethod.Post))
     {
+        //eventually remove these views and just pass the value to the database
         <input type="submit" value="Clock In" formaction="@Url.Action("StudentClockIn", "Student")" />
         <br />
         <br />
@@ -22,4 +58,11 @@
             <input type="submit" value="Clock Out" formaction="@Url.Action("StudentClockOut", "Student")" />
         </div>
     }
+</div>
+
+
+
+<div>
+    <!-- ADD the graph stuff here -->
+
 </div>
