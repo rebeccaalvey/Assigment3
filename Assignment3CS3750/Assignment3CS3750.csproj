@@ -286,6 +286,8 @@
     <Content Include="Views\Student\StudentClockOut.cshtml" />
     <Content Include="Views\Administrator\Administrator.cshtml" />
     <Content Include="Views\Administrator\CreateProject.cshtml" />
+    <Content Include="Views\Student\CreateStudentLogin.cshtml" />
+    <Content Include="Views\Student\StudentLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
