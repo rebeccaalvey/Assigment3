@@ -4,7 +4,14 @@
 }
 
 <h2>StudentClockOut</h2>
-<body>
-    <p>@Model.ClockOut; </p>
 
-</body>
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <body>
+        <p>@Model.ClockOut; </p>
+        <p>@Model.ClockOutComment;</p>
+      
+    </body>
+
+
+}

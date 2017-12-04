@@ -1,4 +1,4 @@
-﻿
+﻿@model Assignment3CS3750.Models.Student
 @{
     ViewBag.Title = "Student";
 }
@@ -16,10 +16,10 @@
 <br />
 <br />
 
-<table border="1">
+<table cellpadding ="4" cellspacing="4">
     <tr>
-        <th> Student First Name</th>
-        <th> Student Last Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
     </tr>
     
     <tr> 
@@ -50,12 +50,18 @@
         <br />
         <br />
         <div>
+            <!--
             <label>Record the work done during this time.</label>
-            <input type="text" id=" student" value="text here" />
+            <input type="text" id=" student" value="" />
+             -->
+          
+            <p> @Html.TextBoxFor(model => model.ClockOutComment)</p>
+            <p> @Html.ValidationMessageFor(model => model.ClockOutComment)</p>
+         <!--   <input type="submit" value="Submit" formaction="//" /> -->
 
-            <br />
-            <br />
-            <input type="submit" value="Clock Out" formaction="@Url.Action("StudentClockOut", "Student")" />
+              <input type="submit" value="Clock Out" formaction="@Url.Action("StudentClockOut", "Student")" />  
+          
+            
         </div>
     }
 </div>

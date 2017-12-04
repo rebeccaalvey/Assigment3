@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Security.Cryptography;
+
 using Assignment3CS3750.Models;
 
 namespace Assignment3CS3750.Controllers
@@ -11,7 +13,7 @@ namespace Assignment3CS3750.Controllers
     {
         Student studentIn = new Student();
         Student studentOut = new Student();
-        Student studentCreate = new Models.Student();
+        Student studentCreate = new Student();
 
         // GET: Student
         public ActionResult Student()
@@ -52,9 +54,12 @@ namespace Assignment3CS3750.Controllers
 
         public ActionResult CreateStudentLogin()
         {
-           //query student username and password
-           //create new username and password
-           //open the student login view.
+
+            //query student username and password
+            //create new username and password
+            //open the student login view.
+
+           
 
             return View(studentCreate);
         }
@@ -69,4 +74,12 @@ namespace Assignment3CS3750.Controllers
         }
 
     }
+
+    /*public class Hash : StudentController
+    {
+        //get password
+
+        MD5 md5 = new MD5CryptoServiceProvider();
+        Byte[] hash = MD5.ComputeHash();
+    }*/
 }

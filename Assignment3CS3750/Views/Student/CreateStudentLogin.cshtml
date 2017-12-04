@@ -1,4 +1,4 @@
-﻿
+﻿@model Assignment3CS3750.Models.Student
 @{
     ViewBag.Title = "CreateStudentLogin";
 }
@@ -8,14 +8,26 @@
 <div>
     @using (Html.BeginForm(FormMethod.Post))
     {
-        <label>Enter Username</label>
-        <input type="text" id="Username" value="" />
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td> First Name</td>
+                <td> @Html.TextBoxFor(model => model.fname)</td>
+            </tr>
+            <tr>
+                <td> Last Name</td>
+                <td> @Html.TextBoxFor(model => model.lname)</td>
+            </tr>
+            <tr>
+                <td> Username</td>
+                <td> @Html.TextBoxFor(model => model.Username)</td>
+            </tr>
+            <tr>
+                <td> Password</td>
+                <td> @Html.TextBoxFor(model => model.Password)</td>
+            </tr>
 
-        <label>Enter Password</label>
-        <input type="text" id="Password" value="" />
 
-        <label>Enter Project</label>
-        <input type="text" id="Project" value="" />
+        </table>
 
         <br />
         <br />
