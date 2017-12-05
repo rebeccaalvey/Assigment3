@@ -38,10 +38,10 @@ namespace Assignment3CS3750.Controllers
 
         public ActionResult StudentClockIn()
         {
-            //Debug.WriteLine("working");
+          
             studentIn.ClockIn = DateTime.Now;
-            //pass timestamp to database
-            //won't need a view, just the timestamp to database
+           
+
             return View(studentIn);
         }
        // [HttpPost]
@@ -66,27 +66,9 @@ namespace Assignment3CS3750.Controllers
 
         public ActionResult CreateStudentLogin()
         {
-            string pass = Request["Password"];
-            //query student username and password
-            //create new username and password
-            //open the student login view.
-            byte[] salt;
-            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-            var pbkdf2 = new Rfc2898DeriveBytes(pass, salt, 10000);
-            byte[] hash = pbkdf2.GetBytes(20);
-
-            byte[] hashBytes = new byte[36];
-            Array.Copy(salt, 0, hashBytes, 0, 16);
-            Array.Copy(hash, 0, hashBytes, 16, 20);
-
-            string savedPasswordHash = Convert.ToBase64String(hashBytes);
-
-            //need the db up and going
-            //DBContext.AddUser(new User { ..., Password = savedPasswordHash });
-
-            return Content(savedPasswordHash);
-           // return View(studentCreate);
+         
+            return View();
         }
 
         public ActionResult StudentLogin()
@@ -94,8 +76,31 @@ namespace Assignment3CS3750.Controllers
             //if login successful return to the general student page
             //verify student login username and password
 
-           
-            return View();
+
+              string pass = Request["Password"];
+            //query student username and password
+            //create new username and password
+            //open the student login view.
+             byte[] salt = new byte [16];
+
+             new RNGCryptoServiceProvider().GetBytes(salt);
+
+             string sSalt = System.Text.Encoding.UTF8.GetString(salt);
+             var pbkdf2 = new Rfc2898DeriveBytes(pass, salt, 10000);
+             byte[] hash = pbkdf2.GetBytes(20);
+
+             byte[] hashBytes = new byte[36];
+             Array.Copy(salt, 0, hashBytes, 0, 16);
+             Array.Copy(hash, 0, hashBytes, 16, 20);
+
+             string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
+             //need the db up and going
+             //DBContext.AddUser(new User { ..., Password = savedPasswordHash });
+
+            return Content(savedPasswordHash);
+
+            //return View();
         }
 
     }
