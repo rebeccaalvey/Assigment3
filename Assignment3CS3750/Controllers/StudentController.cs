@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Security.Cryptography;
 
 using Assignment3CS3750.Models;
+using System.Text;
+using System.Globalization;
 
 namespace Assignment3CS3750.Controllers
 {
@@ -42,26 +44,49 @@ namespace Assignment3CS3750.Controllers
             //won't need a view, just the timestamp to database
             return View(studentIn);
         }
-
-        public ActionResult StudentClockOut()
+       // [HttpPost]
+        public ActionResult StudentClockOut(Student Student)
         {
+            
             studentOut.ClockOut = DateTime.Now;
+            string dt = studentOut.ClockOut.ToString();
+            // string dt = (DateTime.TryParse("ddmmyyyy HHMMss", out studentOut.ClockOut);
 
+
+            string cm = Request["clockoutComment"];
+
+            string result = cm  +"  " + dt;
             //pass time stamp  and comment to the database
             //won't actually need a view, just a timestamp
-            return View(studentOut);
+            // return Content(Model => Model.Clockoutcomment);
+            //return Content(clockoutComment);
+            return View (studentOut);
         }
+       
 
         public ActionResult CreateStudentLogin()
         {
-
+            string pass = Request["Password"];
             //query student username and password
             //create new username and password
             //open the student login view.
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
 
-           
+            var pbkdf2 = new Rfc2898DeriveBytes(pass, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
 
-            return View(studentCreate);
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
+            //need the db up and going
+            //DBContext.AddUser(new User { ..., Password = savedPasswordHash });
+
+            return Content(savedPasswordHash);
+           // return View(studentCreate);
         }
 
         public ActionResult StudentLogin()

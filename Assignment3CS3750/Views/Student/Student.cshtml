@@ -42,29 +42,37 @@
 
 <div>
     <!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
-    @using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm("StudentClockIn"))
     {
         //eventually remove these views and just pass the value to the database
         <input type="submit" value="Clock In" formaction="@Url.Action("StudentClockIn", "Student")" />
         <br />
         <br />
         <br />
-        <div>
+       
+
+   }
+
+
+        </div>
+    <div>
+        @using (Html.BeginForm("StudentClockOut"))
+        { 
             <!--
             <label>Record the work done during this time.</label>
             <input type="text" id=" student" value="" />
              -->
           
-            <p> @Html.TextBoxFor(model => model.ClockOutComment)</p>
+            <p> Comments: @Html.TextBoxFor(model => model.ClockOutComment)</p>
             <p> @Html.ValidationMessageFor(model => model.ClockOutComment)</p>
          <!--   <input type="submit" value="Submit" formaction="//" /> -->
 
-              <input type="submit" value="Clock Out" formaction="@Url.Action("StudentClockOut", "Student")" />  
-          
-            
+              <input type="submit" value="Clock Out" id = "comment" formaction="@Url.Action("StudentClockOut", "Student")" />
+
+        }
         </div>
-    }
-</div>
+       
+
 
 
 

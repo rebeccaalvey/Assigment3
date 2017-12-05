@@ -20,6 +20,17 @@ namespace Assignment3CS3750.Models
 
         public DateTime ClockIn { get; set; }
         public DateTime ClockOut { get; set; }
+        /* public DateTime dt;
+
+         public DateTime ClockIn {
+             get { return dt = DateTime.Now; }
+             set { dt = value; } }
+
+         public DateTime ClockOut {
+             get { return dt = DateTime.Now; }
+             set { dt = value; }
+         }*/
+
         public string ClockOutComment { get; set; }
         // public DateTime ClockIn = DateTime.Now;
     }

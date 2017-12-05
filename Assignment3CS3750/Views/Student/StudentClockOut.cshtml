@@ -8,9 +8,9 @@
 @using (Html.BeginForm(FormMethod.Post))
 {
     <body>
-        <p>@Model.ClockOut; </p>
-        <p>@Model.ClockOutComment;</p>
-      
+        <p>@Model.ClockOut </p>
+        <p>@Model.ClockOutComment</p>
+        <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
     </body>
 
 
