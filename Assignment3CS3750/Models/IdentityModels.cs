@@ -29,5 +29,7 @@ namespace Assignment3CS3750.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Assignment3CS3750.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

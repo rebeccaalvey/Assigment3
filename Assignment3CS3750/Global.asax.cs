@@ -21,6 +21,8 @@ namespace Assignment3CS3750
                 new { controller = "Admin", action = "Login", id = "" }
                 );
 
+            
+
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
