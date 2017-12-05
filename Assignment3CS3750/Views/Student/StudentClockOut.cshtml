@@ -1,0 +1,17 @@
+﻿@model Assignment3CS3750.Models.Student
+@{
+    ViewBag.Title = "StudentClockOut";
+}
+
+<h2>StudentClockOut</h2>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    <body>
+        <p>@Model.ClockOut </p>
+        <p>@Model.ClockOutComment</p>
+        <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
+    </body>
+
+
+}

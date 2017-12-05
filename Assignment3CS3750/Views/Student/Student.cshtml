@@ -1,0 +1,82 @@
+﻿@model Assignment3CS3750.Models.Student
+@{
+    ViewBag.Title = "Student";
+}
+
+<h2>Student</h2>
+
+<div>
+    <!-- ADD the project list box here-->
+    <p> Project List</p>
+    <br />
+    @Html.DropDownList("ListItem")
+</div>
+
+<br />
+<br />
+<br />
+
+<table cellpadding ="4" cellspacing="4">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+    </tr>
+    
+    <tr> 
+    <td> ADD 1  </td>
+    <td> ADD 1  </td>
+    </tr>
+    <tr>
+        <td> ADD 2  </td>
+        <td> ADD 2  </td>
+    </tr>
+    <tr>
+        <td> ADD 3  </td>
+        <td> ADD 3  </td>
+    </tr>
+
+</table>
+
+<br />
+<br />
+
+<div>
+    <!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
+    @using (Html.BeginForm("StudentClockIn"))
+    {
+        //eventually remove these views and just pass the value to the database
+        <input type="submit" value="Clock In" formaction="@Url.Action("StudentClockIn", "Student")" />
+        <br />
+        <br />
+        <br />
+       
+
+   }
+
+
+        </div>
+    <div>
+        @using (Html.BeginForm("StudentClockOut"))
+        { 
+            <!--
+            <label>Record the work done during this time.</label>
+            <input type="text" id=" student" value="" />
+             -->
+          
+            <p> Comments: @Html.TextBoxFor(model => model.ClockOutComment)</p>
+            <p> @Html.ValidationMessageFor(model => model.ClockOutComment)</p>
+         <!--   <input type="submit" value="Submit" formaction="//" /> -->
+
+              <input type="submit" value="Clock Out" id = "comment" formaction="@Url.Action("StudentClockOut", "Student")" />
+
+        }
+        </div>
+       
+
+
+
+
+<div>
+    <!-- ADD the graph stuff here -->
+
+</div>
