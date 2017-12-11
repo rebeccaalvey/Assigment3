@@ -1,4 +1,4 @@
-﻿@model Assignment3CS3750.Models.Student
+﻿@model Assignment3CS3750.Models.Clock
 @{
     ViewBag.Title = "StudentClockOut";
 }
@@ -9,9 +9,12 @@
 {
     <body>
         <p>@Model.ClockOut </p>
-        <p>@Model.ClockOutComment</p>
-        <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
-    </body>
+        <p>This is the comment: @Model.ClockOutComment </p>
+
+       
+
+            <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
+</body>
 
 
 }

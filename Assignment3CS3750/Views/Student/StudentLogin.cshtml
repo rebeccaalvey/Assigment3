@@ -1,29 +1,32 @@
-﻿
+﻿@model Assignment3CS3750.Models.Student
+
 @{
     ViewBag.Title = "StudentLogin";
 }
 
 <h2>Student Login</h2>
 
+ @using (Html.BeginForm(FormMethod.Post))
+        {
 <body>
 
     <div>
 
-        @using (Html.BeginForm(FormMethod.Post))
-        {
-            <label>Enter Username</label>
-            <input type="text" id="Username" value="" />
+        <p>username should be here @Model.Username </p>
+        <p>@Model.Password </p>
+        <p>@Model.lname </p>
+        <p>@Model.fname </p>
 
-            <label>Enter Password</label>
-            <input type="text" id="Password" value="" />
+        <br />
+        <br />
+        <br />
 
-            <br />
-            <br />
-            <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
-
-        }
-
+                <p> UserName: @Html.TextBoxFor(model => model.Username)</p>
+               <p> Password: @Html.TextBoxFor(model => model.Password)</p>
+     
+        <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
 
 
     </div>
 </body>
+ }

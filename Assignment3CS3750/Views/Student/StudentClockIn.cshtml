@@ -1,4 +1,4 @@
-﻿@model Assignment3CS3750.Models.Student
+﻿@model Assignment3CS3750.Models.Clock
 @{
     ViewBag.Title = "StudentClockIn";
 }
@@ -6,9 +6,10 @@
 <h2>StudentClockIn</h2>
 @using (Html.BeginForm(FormMethod.Post))
 {
-<body>
-    <p>@Model.ClockIn </p>
-    <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
-</body>
-
+    <body>
+       <p>This is the Timestamp:  @Model.ClockIn</p>
+        <p> This is the query: @Model.clockInQuery</p>
+      
+        <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
+    </body>
 }

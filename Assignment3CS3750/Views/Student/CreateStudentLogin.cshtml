@@ -1,4 +1,6 @@
-﻿@model Assignment3CS3750.Models.Student
+﻿
+@model Assignment3CS3750.Models.Student
+
 @{
     ViewBag.Title = "CreateStudentLogin";
 }
@@ -6,27 +8,37 @@
 <h2>Create A Student Login</h2>
 
 <div>
-    @using (Html.BeginForm(FormMethod.Post))
+    @using (Html.BeginForm("CreateStudentLogin", "Controllers", FormMethod.Post))
     {
         <table cellpadding="2" cellspacing="2">
             <tr>
-                <td> First Name</td>
-                <td> @Html.TextBoxFor(model => model.fname)</td>
-            </tr>
-            <tr>
-                <td> Last Name</td>
-                <td> @Html.TextBoxFor(model => model.lname)</td>
+                <td> Password</td>
+                <td> @Html.TextBoxFor(model => model.Password, new {@Student = "Password"})
+                  
+                </td>
             </tr>
             <tr>
                 <td> Username</td>
-                <td> @Html.TextBoxFor(model => model.Username)</td>
+                <td> @Html.TextBoxFor(model => model.Username, new { @Student = "Username"})
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td> First Name</td>
+                <td> @Html.TextBoxFor(model => model.fname, new { @Student = "fname" })
+                    
+                </td>
             </tr>
             <tr>
-                <td> Password</td>
-                <td> @Html.TextBoxFor(model => model.Password)</td>
+                <td> Last Name</td>
+                <td> @Html.TextBoxFor(model => model.lname, new { @Student = "lname" })
+                  
+                
+                </td>
             </tr>
 
-
+         
         </table>
 
         <br />

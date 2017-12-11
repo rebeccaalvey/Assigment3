@@ -15,7 +15,8 @@ namespace Assignment3CS3750.Controllers
         {
        
             var dbCon = DBConnection.Instance();
-            dbCon.DatabaseName = "Group4";
+            //var dbCon = D
+            dbCon.DatabaseName = "assignment3";
             if (dbCon.IsConnect())
             {
                 //suppose col0 and col1 are defined as VARCHAR in the DB

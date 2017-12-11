@@ -16,6 +16,13 @@ namespace Assignment3CS3750
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               "Student",
+               "Student/{action}/{id}",
+               new { controller = "Studemt", action = "CreateStudentLogin", id = "" }
+               );
+
+
+            routes.MapRoute(
                 "Admin",
                 "Admin/{action}/{id}",
                 new { controller = "Admin", action = "Login", id = "" }

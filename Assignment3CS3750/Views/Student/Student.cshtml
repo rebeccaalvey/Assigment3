@@ -1,4 +1,6 @@
-﻿@model Assignment3CS3750.Models.Student
+﻿@using Assignment3CS3750.Models;
+@model Tuple<Student, Clock>
+
 @{
     ViewBag.Title = "Student";
 }
@@ -16,7 +18,7 @@
 <br />
 <br />
 
-<table cellpadding ="4" cellspacing="4">
+<table border="1" cellpadding ="4" cellspacing="4">
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -40,27 +42,32 @@
 <br />
 <br />
 
-<table cellpadding="4" cellspacing="4">
+<table border = "1" cellpadding="4" cellspacing="4">
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>Project</th>
+        <th>Clock In </th>
+        <th>Clock Out </th>
     </tr>
 
     <tr>
         <td> ADD 1  </td>
         <td> ADD 1  </td>
+        <td> ADD 1  </td>
     </tr>
     <tr>
         <td> ADD 2  </td>
         <td> ADD 2  </td>
+        <td> ADD 2  </td>
     </tr>
     <tr>
+        <td> ADD 3  </td>
         <td> ADD 3  </td>
         <td> ADD 3  </td>
     </tr>
 
 </table>
-
+<br />
+<br />
 
 <div>
     <!--<button type=" button" value=" Clock In " onclick=" location.href= '<%: Url.Action("StudentLogin", "Student") %>'"> Log In </button>-->
@@ -78,18 +85,17 @@
 
         </div>
     <div>
-        @using (Html.BeginForm("StudentClockOut"))
+        @using (Html.BeginForm("StudentClockOut", "Controllers", FormMethod.Post))
         { 
             <!--
             <label>Record the work done during this time.</label>
             <input type="text" id=" student" value="" />
              -->
           
-            <p> Comments: @Html.TextBoxFor(model => model.ClockOutComment)</p>
-            <p> @Html.ValidationMessageFor(model => model.ClockOutComment)</p>
-         <!--   <input type="submit" value="Submit" formaction="//" /> -->
+            <p> Comments: @Html.TextBoxFor(tuple=> tuple.Item2.ClockOutComment, new { @Clock = "ClockOutComment"})</p>
 
-              <input type="submit" value="Clock Out" id = "comment" formaction="@Url.Action("StudentClockOut", "Student")" />
+
+              <input type="submit" value="ClockOut" id = "comment" formaction="@Url.Action("StudentClockOut", "Student")" />
 
         }
         </div>

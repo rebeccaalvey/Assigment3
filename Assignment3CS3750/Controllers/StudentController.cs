@@ -8,15 +8,41 @@ using System.Security.Cryptography;
 using Assignment3CS3750.Models;
 using System.Text;
 using System.Globalization;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace Assignment3CS3750.Controllers
 {
     public class StudentController : Controller
     {
-        Student studentIn = new Student();
-        Student studentOut = new Student();
-        Student studentCreate = new Student();
+        
+        Clock c = new Models.Clock();
+        Student s = new Models.Student();
 
+       /*public ViewResult DBConn() 
+        {
+            
+            var dbCon = DBConnection.Instance();
+            //var dbCon = D
+            dbCon.DatabaseName = "assignment3";
+            if (dbCon.IsConnect())
+            {
+                //suppose col0 and col1 are defined as VARCHAR in the DB
+                string query = "SELECT * FROM timesheets";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    string someStringFromColumnZero = reader.GetString(0);
+
+                    Console.WriteLine(someStringFromColumnZero);
+                    ViewData["admin"] = someStringFromColumnZero;
+                }
+            }
+            dbCon.Close();
+
+            return View();
+        }*/
         // GET: Student
         public ActionResult Student()
         {
@@ -31,53 +57,143 @@ namespace Assignment3CS3750.Controllers
             };
 
             ViewBag.ListItem = ObjItem;
-
+          
 
             return View();
         }
 
         public ActionResult StudentClockIn()
         {
-          
-            studentIn.ClockIn = DateTime.Now;
-           
-
-            return View(studentIn);
-        }
-       // [HttpPost]
-        public ActionResult StudentClockOut(Student Student)
-        {
+           //Timesheet_data timesheet_data_id, timesheet_id, clock_in, clock_out, comment, modified
             
-            studentOut.ClockOut = DateTime.Now;
-            string dt = studentOut.ClockOut.ToString();
-            // string dt = (DateTime.TryParse("ddmmyyyy HHMMss", out studentOut.ClockOut);
+           // studentIn.ClockIn = DateTime.Now;
+            var dbCon = DBConnection.Instance();
+            //var dbCon = D
+            dbCon.DatabaseName = "assignment3";
+            
 
+            if (dbCon.IsConnect())
+            {
+                //suppose col0 and col1 are defined as VARCHAR in the DB
+                string query = "";
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                string x = "";
 
-            string cm = Request["clockoutComment"];
+                while (reader.Read())
+                {
+                    // someStringFromColumnZero = reader.GetString(0);
+                    x = reader.GetString(0);
+                    Console.WriteLine(x);                                     
+                }
 
-            string result = cm  +"  " + dt;
-            //pass time stamp  and comment to the database
-            //won't actually need a view, just a timestamp
-            // return Content(Model => Model.Clockoutcomment);
-            //return Content(clockoutComment);
-            return View (studentOut);
+                c.clockInQuery = x;
+                c.ClockIn = DateTime.Now;
+            }
+            
+
+            dbCon.Close();
+           
+            return View(c);
+            
+
         }
-       
-
-        public ActionResult CreateStudentLogin()
+        //[HttpPost]
+        public ActionResult StudentClockOut(Clock c2, FormCollection formCollection)
         {
+          //  string cm = Request["clockoutComment"];
+            c.ClockOut = DateTime.Now;
+            //c.ClockOutComment = formCollection.GetValue("ClockOutComment").AttemptedValue;
+            // c.ClockOutComment  = c2.ClockOutComment;
+            c.ClockOutComment = Request.Form["Item2.ClockOutComment"].ToString();
+              
+            //c.ClockOutComment = "comments";
 
-         
-            return View();
+
+            return View("StudentClockOut", c);
         }
 
+        //[HttpPost]
+        public ActionResult CreateStudentLogin(Student s2, FormCollection formCollection)//Student s2, FormCollection formCollection)
+        {
+            if (!string.IsNullOrEmpty(Request.Form["Username"]))
+            {
+                s.Username = Request.Form["Username"].ToString();
+                s.Password = Request.Form["Password"].ToString();
+                s.fname = Request.Form["fname"].ToString();
+                s.lname = Request.Form["lname"].ToString();
+            }
+
+            // s.Username = Request.Form["model.Username"].ToString();
+
+            //s.Password = Request.Form["Password"].ToString();
+            // s.Username = Request["Username"];
+            //  s.lname = Request.Form["lname"];
+            //  s.fname = Request.Form["fname"];
+            // s.fname = Request.Form["fname"].ToString();
+            //  s.lname = Request.Form["lname"].ToString();*/
+            try
+            {
+
+
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = "assignment3";
+
+
+                if (dbCon.IsConnect())
+                {
+                    //suppose col0 and col1 are defined as VARCHAR in the DB
+                    string query = "Insert Into users(password, user_name, last_name,first_name, admin) " +
+                        "VALUES (@password, @user_name, @last_name, @first_name,0)";
+                    //var cmd = new MySqlCommand(query, dbCon.Connection);
+                    //  var reader = cmd.ExecuteReader();
+                    /*  string x = "";
+
+                      while (reader.Read())
+                      {
+                          // someStringFromColumnZero = reader.GetString(0);
+                          x = reader.GetString(2);
+                          Console.WriteLine(x);
+                      }*/
+
+                    using (var cmd = new MySqlCommand(query ))
+                    {
+                        cmd.Connection = dbCon.Connection;
+                        cmd.Parameters.AddWithValue("@password", s.Password);
+                        cmd.Parameters.AddWithValue("@user_name", s.Username);
+                        cmd.Parameters.AddWithValue("@last_name", s.lname);
+                        cmd.Parameters.AddWithValue("@first_name", s.fname);
+                        /*
+                        cmd.Parameters.Add(new MySqlParameter("@password", s.Password));
+                        cmd.Parameters.Add(new MySqlParameter("@user_name", s.Username));
+                        cmd.Parameters.Add(new MySqlParameter("@first_name", s.fname));
+                        cmd.Parameters.Add(new MySqlParameter("@last_name", s.lname));
+                        */
+                        cmd.ExecuteNonQuery();
+
+                        dbCon.Close();
+                    }
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.Write( "Data not inserted !" + ex);
+            }
+
+            return View("CreateStudentLogin", s);
+        }
+
+        //[HttpPost]
         public ActionResult StudentLogin()
         {
             //if login successful return to the general student page
             //verify student login username and password
 
 
-              string pass = Request["Password"];
+            // string pass = Request["Password"];
+
+            string pass = "delete later";
             //query student username and password
             //create new username and password
             //open the student login view.
@@ -98,10 +214,12 @@ namespace Assignment3CS3750.Controllers
              //need the db up and going
              //DBContext.AddUser(new User { ..., Password = savedPasswordHash });
 
-            return Content(savedPasswordHash);
+           // return Content(savedPasswordHash);
 
-            //return View();
+            return View(s);
         }
+        
+
 
     }
 
