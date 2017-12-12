@@ -18,7 +18,8 @@ namespace Assignment3CS3750.Models
         public string Password { get; set; }
         public string Project { get; set; }
 
-        
+		// Hold the value for errors being displayed in the username
+        public string LoginError { get; set; }
     }
     
 }

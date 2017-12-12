@@ -58,7 +58,7 @@ namespace Assignment3CS3750.Controllers
 
             ViewBag.ListItem = ObjItem;
           
-
+			
             return View();
         }
 
@@ -187,13 +187,16 @@ namespace Assignment3CS3750.Controllers
         //[HttpPost]
         public ActionResult StudentLogin()
         {
-            //if login successful return to the general student page
-            //verify student login username and password
+			//if login successful return to the general student page
+			//verify student login username and password
+			s.LoginError = "tesating";
 
+			// Need to verify if login is a student or an admin
+			var username = Request.Form["UserName:"].ToString();
+			var password = Request.Form["Password:"].ToString();
+			// string pass = Request["Password"];
 
-            // string pass = Request["Password"];
-
-            string pass = "delete later";
+			//string pass = "delete later";
             //query student username and password
             //create new username and password
             //open the student login view.
@@ -202,7 +205,7 @@ namespace Assignment3CS3750.Controllers
              new RNGCryptoServiceProvider().GetBytes(salt);
 
              string sSalt = System.Text.Encoding.UTF8.GetString(salt);
-             var pbkdf2 = new Rfc2898DeriveBytes(pass, salt, 10000);
+             var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000);
              byte[] hash = pbkdf2.GetBytes(20);
 
              byte[] hashBytes = new byte[36];
@@ -211,12 +214,66 @@ namespace Assignment3CS3750.Controllers
 
              string savedPasswordHash = Convert.ToBase64String(hashBytes);
 
-             //need the db up and going
-             //DBContext.AddUser(new User { ..., Password = savedPasswordHash });
+			//need the db up and going
+			//DBContext.AddUser(new User { ..., Password = savedPasswordHash });
 
-           // return Content(savedPasswordHash);
+			try
+			{
 
-            return View(s);
+
+				var dbCon = DBConnection.Instance();
+				dbCon.DatabaseName = "assignment3";
+
+
+				if (dbCon.IsConnect())
+				{
+					//suppose col0 and col1 are defined as VARCHAR in the DB
+					string query = "SELECT  admin, user_name, password FROM Users WHERE user_name = " + /*username*/" AND "/*savedPasswordHash*/;
+					var admin = 0;
+					//var cmd = new MySqlCommand(query, dbCon.Connection);
+					//  var reader = cmd.ExecuteReader();
+					/*  string x = "";
+
+                      while (reader.Read())
+                      {
+                          // someStringFromColumnZero = reader.GetString(0);
+                          x = reader.GetString(2);
+                          Console.WriteLine(x);
+                      }*/
+
+					using (var cmd = new MySqlCommand(query))
+					{
+						cmd.Connection = dbCon.Connection;
+
+						var returned = cmd.ExecuteScalar();
+
+						dbCon.Close();
+					}
+
+					if (admin == 1)
+					{
+						// Pasword is valid, go to admin page
+					}
+					else if (admin == 0)
+					{
+						// Password is valid, go to the students page
+					}
+					else
+					{
+						// Display error that Username or Password are invalid
+						s.LoginError = "Username or Password is invalid. Please try again.";
+					}
+				}
+
+			}
+			catch (MySqlException ex)
+			{
+				Console.Write("Data not retrieved" + ex);
+			}
+
+			// return Content(savedPasswordHash);
+
+			return View(s);
         }
         
 

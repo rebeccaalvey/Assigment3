@@ -20,11 +20,12 @@
         <br />
         <br />
         <br />
-
+				<p>@Model.LoginError</p>
                 <p> UserName: @Html.TextBoxFor(model => model.Username)</p>
                <p> Password: @Html.TextBoxFor(model => model.Password)</p>
      
         <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
+
 
 
     </div>
