@@ -12,16 +12,7 @@
 
     <div>
 
-        <p>username should be here @Model.Username </p>
-        <p>@Model.Password </p>
-        <p>@Model.lname </p>
-        <p>@Model.fname </p>
-
-        <br />
-        <br />
-        <br />
-
-                <p> UserName: @Html.TextBoxFor(model => model.Username)</p>
+               <p> UserName: @Html.TextBoxFor(model =>model.Username)</p>
                <p> Password: @Html.TextBoxFor(model => model.Password)</p>
      
         <input type="submit" value="Submit" formaction="@Url.Action("Student", "Student")" />
