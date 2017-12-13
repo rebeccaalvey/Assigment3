@@ -154,81 +154,96 @@ namespace Assignment3CS3750.Controllers
             }
 
             //[HttpPost]
-            public ActionResult CreateStudentLogin(Student s2, FormCollection formCollection)//Student s2, FormCollection formCollection)
-            {
+        public ActionResult CreateStudentLogin(Student s2, FormCollection formCollection)//Student s2, FormCollection formCollection)
+        {
 
-                return View(s);
-            }
+			return View(s);
+        }
+
+		public ActionResult StudentProjectList()
+		{
+			// Needs to sort by group name
+			// Example data - Needs to be replaced with data array from database
+			s.StudentGroup = new string[] {
+				"Doug", "Sass", "Group 4", "20",
+				"Rebecca", "Alvey", "Group 4", "20",
+				"Mikaella", "Giffin", "Group 5", "20",
+				"Brynn", "Player", "Group 5", "20"
+			};
+			s.StudentCount = 0;
+			return View(s);
+		}
 
             //[HttpPost]
-            public ActionResult StudentLogin()
+        public ActionResult StudentLogin()
+        {
+            //if login successful return to the general student page
+
+            //verify student login username and password
+            if (!string.IsNullOrEmpty(Request.Form["Username"]))
             {
-                //if login successful return to the general student page
-                //verify student login username and password
-                if (!string.IsNullOrEmpty(Request.Form["Username"]))
-                {
-                    s.Username = Request.Form["Username"].ToString();
-                    s.Password = Request.Form["Password"].ToString();
-                    s.fname = Request.Form["fname"].ToString();
-                    s.lname = Request.Form["lname"].ToString();
-                }
-
-
-                try
-                {
-
-
-                    var dbCon = DBConnection.Instance();
-                    dbCon.DatabaseName = "assignment3";
-
-
-                    if (dbCon.IsConnect())
-                    {
-                        //suppose col0 and col1 are defined as VARCHAR in the DB
-                        string query = "Insert Into users(password, user_name, last_name,first_name, admin) " +
-                            "VALUES (@password, @user_name, @last_name, @first_name,0)";
-                        //var cmd = new MySqlCommand(query, dbCon.Connection);
-                        //  var reader = cmd.ExecuteReader();
-
-
-                        using (var cmd = new MySqlCommand(query))
-                        {
-                            cmd.Connection = dbCon.Connection;
-                            cmd.Parameters.AddWithValue("@password", s.Password);
-                            cmd.Parameters.AddWithValue("@user_name", s.Username);
-                            cmd.Parameters.AddWithValue("@last_name", s.lname);
-                            cmd.Parameters.AddWithValue("@first_name", s.fname);
-
-                            cmd.ExecuteNonQuery();
-
-                            dbCon.Close();
-                        }
-                    }
-
-                }
-                catch (MySqlException ex)
-                {
-                    Console.Write("Data not inserted !" + ex);
-                }
-
-                    byte[] salt = new byte [16];
-
-                    new RNGCryptoServiceProvider().GetBytes(salt);
-
-                    string sSalt = System.Text.Encoding.UTF8.GetString(salt);
-                    var pbkdf2 = new Rfc2898DeriveBytes(s.Password, salt, 10000);
-                    byte[] hash = pbkdf2.GetBytes(20);
-
-                    byte[] hashBytes = new byte[36];
-                    Array.Copy(salt, 0, hashBytes, 0, 16);
-                    Array.Copy(hash, 0, hashBytes, 16, 20);
-
-                    string savedPasswordHash = Convert.ToBase64String(hashBytes);
-
-                return View(s);
+                s.Username = Request.Form["Username"].ToString();
+                s.Password = Request.Form["Password"].ToString();
+                s.fname = Request.Form["fname"].ToString();
+                s.lname = Request.Form["lname"].ToString();
             }
 
+
+            try
+            {
+
+
+                var dbCon = DBConnection.Instance();
+                dbCon.DatabaseName = "assignment3";
+
+
+                if (dbCon.IsConnect())
+                {
+                    //suppose col0 and col1 are defined as VARCHAR in the DB
+                    string query = "Insert Into users(password, user_name, last_name,first_name, admin) " +
+                        "VALUES (@password, @user_name, @last_name, @first_name,0)";
+                    //var cmd = new MySqlCommand(query, dbCon.Connection);
+                    //  var reader = cmd.ExecuteReader();
+
+
+                    using (var cmd = new MySqlCommand(query))
+                    {
+                        cmd.Connection = dbCon.Connection;
+                        cmd.Parameters.AddWithValue("@password", s.Password);
+                        cmd.Parameters.AddWithValue("@user_name", s.Username);
+                        cmd.Parameters.AddWithValue("@last_name", s.lname);
+                        cmd.Parameters.AddWithValue("@first_name", s.fname);
+
+                        cmd.ExecuteNonQuery();
+
+                        dbCon.Close();
+                    }
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.Write("Data not inserted !" + ex);
+            }
+
+                byte[] salt = new byte [16];
+
+                new RNGCryptoServiceProvider().GetBytes(salt);
+
+                string sSalt = System.Text.Encoding.UTF8.GetString(salt);
+                var pbkdf2 = new Rfc2898DeriveBytes(s.Password, salt, 10000);
+                byte[] hash = pbkdf2.GetBytes(20);
+
+                byte[] hashBytes = new byte[36];
+                Array.Copy(salt, 0, hashBytes, 0, 16);
+                Array.Copy(hash, 0, hashBytes, 16, 20);
+
+                string savedPasswordHash = Convert.ToBase64String(hashBytes);
+
+            return View(s);
         }
+
+    }
 
        
 }

@@ -20,6 +20,10 @@ namespace Assignment3CS3750.Models
 
 		// Hold the value for errors being displayed in the username
         public string LoginError { get; set; }
-    }
+
+		public string[] StudentGroup { get; set; }
+		public int StudentCount { get; set; }
+
+	}
     
 }

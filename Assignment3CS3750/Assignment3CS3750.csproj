@@ -229,6 +229,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Clock.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -300,13 +301,12 @@
     <Content Include="Views\Administrator\CreateProject.cshtml" />
     <Content Include="Views\Student\CreateStudentLogin.cshtml" />
     <Content Include="Views\Student\StudentLogin.cshtml" />
-    <Content Include="Views\Administrator\ProjectList.cshtml" />
     <Content Include="Views\Student\StudentProjectList.cshtml" />
+    <Content Include="Views\ProjectList\ProjectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\ProjectList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
