@@ -223,6 +223,7 @@
     <Compile Include="Controllers\DBConnection.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectListController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -299,10 +300,13 @@
     <Content Include="Views\Administrator\CreateProject.cshtml" />
     <Content Include="Views\Student\CreateStudentLogin.cshtml" />
     <Content Include="Views\Student\StudentLogin.cshtml" />
+    <Content Include="Views\Administrator\ProjectList.cshtml" />
+    <Content Include="Views\Student\StudentProjectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\ProjectList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "StudentProjectList";
+}
+
+<h2>StudentProjectList</h2>
+
+<div>
+	<input type="submit" value="Back to Student Page ->" formaction="@Url.Action("Student", "Student")" />
+	<br />
+	<!-- ADD the project list box here-->
+	<p> Project List</p>
+	<br />
+	@Html.DropDownList("ListItem")
+</div>
+
+<br />
+<br />
+<br />
+<!--Need to replace with table of studnet name, their group and their hours-->
+<table border="1" cellpadding="4" cellspacing="4">
+	<tr>
+		<th>First Name</th>
+		<th>Last Namew</th>
+		<th>Group</th>
+		<th>Hours</th>
+	</tr>
+
+	<tr>
+		<td> ADD 1  </td>
+		<td> ADD 1  </td>
+		<td> ADD 1  </td>
+	</tr>
+	<tr>
+		<td> ADD 2  </td>
+		<td> ADD 2  </td>
+		<td> ADD 2  </td>
+	</tr>
+	<tr>
+		<td> ADD 3  </td>
+		<td> ADD 3  </td>
+		<td> ADD 3  </td>
+	</tr>
+
+</table>
+
+<br />
+<br />
+
+<div>
+	<!-- ADD the graph stuff here -->
+
+</div>
